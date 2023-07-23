@@ -1,5 +1,7 @@
 import React from 'react'
 import '@styles/global.css'
+import Nav from '@components/Nav'
+import Provider from '@components/Provider'
 
 export const metadata = {
     title: 'Promptopia',
@@ -15,6 +17,7 @@ export default function RootLayout({children}: any) {
             </div>
 
             <main className='app'>
+                <Nav />
                 {children}
             </main>
         </body>
