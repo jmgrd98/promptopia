@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 export default function Nav() {
-    const isUserLogged = true
+    const isUserLogged = false
 
 
     // const { data: session } = useSession();
@@ -32,15 +32,17 @@ export default function Nav() {
             {isUserLogged ? (
                 <div className='flex gap-3 md:gap-5'>
                     <Link href='/create-prompt' className='black_btn'>Create Post</Link>
-                    <button type='button' className='outline_btn'>Sign Out</button>
+                    <button type='button' className='outline_btn' onClick={signOut}>Sign Out</button>
 
                     <Link href='/profile'>
-                        <Image src='/assets/images/profile.svg' width={37} height={37} alt='Profile image' className='rounded-full'/>
+                        <Image src='/assets/images/logo.svg' width={37} height={37} alt='Profile image' className='rounded-full'/>
                     </Link>
                 </div>
             ) : (
             <>
-                <Link href='/login' className='black_btn'>Login</Link>
+            {providers && Object.values(providers).map((provider: any) => (
+                <button type='button' key={provider.name} onClick={() => signIn(provider.id)} className='black_btn'>Sign In</button>
+            ))}
             </>
             )}
         </div>
