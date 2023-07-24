@@ -16,6 +16,28 @@ export default function CreatePrompt() {
     const createPrompt = async (e: any) => {
         e.preventDefault()
         setSubmitting(true)
+
+        try {
+          const response = await fetch('/api/prompt/new', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              prompt: post.prompt,
+              userId: session?.user.id,
+              tag: post.tag, 
+            }),
+          })
+
+          if(response.ok) {
+            router.push('/')
+          }
+        } catch (error) {
+          console.error(error)
+        } finally {
+          setSubmitting(false)
+        }
     }
 
   return (
