@@ -1,7 +1,9 @@
-import React from 'react'
+import PromptCard from "./PromptCard"
 
-export default function Profile() {
+export default function Profile({name, desc, data, handleEdit, handleDelete}: any) {
   return (
-    <div>Profile</div>
+    <section className="w-full">
+      <h1>{name} Profile</h1>
+    </section>
   )
 }
