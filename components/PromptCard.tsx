@@ -7,7 +7,13 @@ import Image from 'next/image'
 
 export default function PromptCard({post, handleTagClick, handleEdit, handleDelete}: any) {
 
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState("")
+
+  const handleCopy = () => {
+    setCopied(post.prompt)
+    navigator.clipboard.writeText(post.prompt)
+    setTimeout(() => setCopied(""), 3000)
+  }
 
   return (
     <section className='prompt_card'>
@@ -26,7 +32,7 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
           </div>
         </div>
 
-        <div className='copy_btn' onClick={() => {}}>
+        <div className='copy_btn' onClick={handleCopy}>
           <Image src={copied === post.prompt ? '/assets/icons/tick.svg' : '/assets/icons/copy.svg'}
           alt="copy icon"
           width={12}
