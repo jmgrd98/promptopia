@@ -6,7 +6,7 @@ export const GET = async (req: any, {params}: any) => {
         await connectToDB();
 
         const prompts = await Prompt.find({
-            creator: params.id,
+            creator: params._id,
         }).populate("creator");
         return new Response(JSON.stringify(prompts), { status: 200 });
     } catch (error) {
