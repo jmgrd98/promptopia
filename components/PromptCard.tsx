@@ -16,8 +16,8 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
   }
 
   return (
-    <section className='prompt_card'>
-      <div className='flex-start justify-between items-start gap-5'>
+    <div className='prompt_card'>
+      <div className='flex justify-between items-start gap-5'>
         <div className='flex-1 flex justify-start items-center gap-3 cursor-pointer'>
           <Image src={post.creator.image}
           alt="user image"
@@ -48,6 +48,6 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
       >
         {post.tag}
       </p>
-    </section>
+    </div>
   )
 }
