@@ -22,7 +22,7 @@ export default function MyProfile() {
 
     const {data: session} = useSession() as unknown as { data: Session | null };
     const router = useRouter()
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState<{ _id: string; }[]>([]);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -41,15 +41,15 @@ export default function MyProfile() {
         router.push(`/update-prompt?id=${post._id}`);
     }
 
-    const handleDelete = async (post: any) => {
+    const handleDelete = async (idToDelete: string) => {
         const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
 
         if(hasConfirmed) {
             try{
-                await fetch(`/api/posts/${post._id}`, {
+                await fetch(`/api/posts/${idToDelete}`, {
                     method: 'DELETE',
                 })
-                const filteredPosts = posts.filter((p) => p._id !== p._id)
+                const filteredPosts = posts.filter((p) => p._id !== idToDelete);
                 setPosts(filteredPosts);
             } catch (error) {
                 console.error(error)
