@@ -5,9 +5,22 @@ import {useSession} from 'next-auth/react'
 import {useRouter} from 'next/navigation'
 import Form from '@components/Form'
 
+interface User {
+    name?: string;
+    email?: string;
+    image?: string;
+    id: string;
+}
+
+interface Session {
+    expires: string;
+    user: User;
+}
+
 export default function CreatePrompt() {
 
-    const {data: session} = useSession()
+    const {data: session} = useSession() as unknown as { data: Session | null };
+
     const router = useRouter()
 
     const [submitting, setSubmitting] = useState(false)
