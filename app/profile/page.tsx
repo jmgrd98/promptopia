@@ -6,9 +6,21 @@ import {useRouter} from 'next/navigation'
 
 import Profile from '@components/Profile'
 
+interface User {
+    name?: string;
+    email?: string;
+    image?: string;
+    id: string;
+}
+
+interface Session {
+    expires: string;
+    user: User;
+}
+
 export default function MyProfile() {
 
-    const {data: session} = useSession()
+    const {data: session} = useSession() as unknown as { data: Session | null };
     const router = useRouter()
     const [posts, setPosts] = useState([])
 
