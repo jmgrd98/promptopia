@@ -6,9 +6,21 @@ import { useState, useEffect } from 'react'
 import {signIn, signOut, useSession, getProviders, ClientSafeProvider, LiteralUnion} from 'next-auth/react'
 import {BuiltInProviderType} from "@node_modules/next-auth/providers";
 
+interface User {
+    name?: string;
+    email?: string;
+    image?: string;
+    id: string;
+}
+
+interface Session {
+    expires: string;
+    user: User;
+}
+
 export default function Nav() {
-    
-    const { data: session } = useSession()
+
+    const {data: session} = useSession() as unknown as { data: Session | null };
 
     const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null>(null)
     const [toggleDropdown, setToggleDropdown] = useState(false)
