@@ -7,7 +7,7 @@ const handler = NextAuth({
     providers: [
         GoogleProvider({
             clientId: String(process.env.GOOGLE_CLIENT_ID),
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientSecret: String(process.env.GOOGLE_CLIENT_SECRET),
         }),
     ],
     callbacks: {
