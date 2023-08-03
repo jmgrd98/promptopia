@@ -14,13 +14,18 @@ export default function MyProfile() {
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await fetch(`/api/users/${session.user.id}/posts`)
-            const data = await res.json()
-            setPosts(data)
-        }
+            if (session && session.user) {
+                const res = await fetch(`/api/users/${session.user.id}/posts`);
+                const data = await res.json();
+                setPosts(data);
+                console.log(data);
+                console.log(session.user.id);
+            }
+        };
 
-        if (session.user.id) fetchPosts()
-    }, []);
+        if (session && session.user) fetchPosts();
+    }, [session]);
+
 
     const handleEdit = (post) => {
         router.push(`/update-prompt?id=${post._id}`);
