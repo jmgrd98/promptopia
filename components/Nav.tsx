@@ -32,7 +32,8 @@ export default function Nav() {
             {session?.user ? (
                 <div className='flex gap-3 md:gap-5'>
                     <Link href='/create-prompt' className='black_btn'>Create Post</Link>
-                    <button type='button' className='outline_btn' onClick={signOut}>Sign Out</button>
+                    <button type='button' className='outline_btn' onClick={() => signOut()}>Sign Out</button>
+
 
                     <Link href='/profile'>
                         <Image
