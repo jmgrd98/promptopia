@@ -5,11 +5,23 @@ import {useSession} from 'next-auth/react'
 import {useRouter, usePathname} from 'next/navigation'
 import Image from 'next/image'
 
+interface User {
+    name?: string;
+    email?: string;
+    image?: string;
+    id: string;
+}
+
+interface Session {
+    expires: string;
+    user: User;
+}
+
 export default function PromptCard({post, handleTagClick, handleEdit, handleDelete}: any) {
 
     const [copied, setCopied] = useState("")
 
-    const {data: session} = useSession()
+    const {data: session} = useSession() as unknown as { data: Session | null };
     const pathName = usePathname()
     const router = useRouter()
 
@@ -59,7 +71,7 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
                 #{post.tag}
             </p>
 
-            {session?.user.id === post.creator._id && pathName === '/profile' &&  (
+            {session.user.id === post.creator._id && pathName === '/profile' &&  (
                 <div className='flex justify-end items-center gap-5 mt-5'>
                     <button className='font-inter text-sm green_gradient cursor-pointer' onClick={handleEdit}>Edit</button>
                     <button className='font-inter text-sm orange_gradient cursor-pointer' onClick={handleDelete}>Delete</button>
