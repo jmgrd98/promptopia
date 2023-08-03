@@ -61,13 +61,8 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
 
             {session?.user.id === post.creator._id && pathName === '/profile' &&  (
                 <div className='flex justify-end items-center gap-5 mt-5'>
-                    <div className='edit_btn' onClick={handleEdit}>
-                        <p>Edit</p>
-                    </div>
-
-                    <div className='delete_btn' onClick={handleDelete}>
-                        <p>Delete</p>
-                    </div>
+                    <button className='font-inter text-sm green_gradient cursor-pointer' onClick={handleEdit}>Edit</button>
+                    <button className='font-inter text-sm orange_gradient cursor-pointer' onClick={handleDelete}>Delete</button>
                 </div>
             )}
         </div>
