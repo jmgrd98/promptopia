@@ -30,8 +30,6 @@ export default function MyProfile() {
                 const res = await fetch(`/api/users/${session.user.id}/posts`);
                 const data = await res.json();
                 setPosts(data);
-                console.log(data);
-                console.log(session.user.id);
             }
         };
 
@@ -39,11 +37,11 @@ export default function MyProfile() {
     }, [session]);
 
 
-    const handleEdit = (post) => {
+    const handleEdit = (post: any) => {
         router.push(`/update-prompt?id=${post._id}`);
     }
 
-    const handleDelete = async (post) => {
+    const handleDelete = async (post: any) => {
         const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
 
         if(hasConfirmed) {
