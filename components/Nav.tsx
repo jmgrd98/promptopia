@@ -49,7 +49,7 @@ export default function Nav() {
 
                     <Link href='/profile'>
                         <Image
-                        src={session?.user.image}
+                        src={session.user.image}
                         width={37}
                         height={37}
                         alt='Profile image'
