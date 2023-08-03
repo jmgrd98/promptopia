@@ -28,7 +28,7 @@ export default function CreatePrompt() {
             },
             body: JSON.stringify({
               prompt: post.prompt,
-              userId: session?.user?.id,
+              userId: session?.user?._id,
               tag: post.tag,
             }),
           })
