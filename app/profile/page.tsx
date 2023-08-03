@@ -29,12 +29,19 @@ export default function MyProfile() {
     }
 
     const handleDelete = async (post) => {
-        const res = await fetch(`/api/posts/${post._id}`, {
-            method: 'DELETE',
-        })
-        const data = await res.json()
-        console.log(data)
-        router.push('/profile')
+        const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
+
+        if(hasConfirmed) {
+            try{
+                await fetch(`/api/posts/${post._id}`, {
+                    method: 'DELETE',
+                })
+                const filteredPosts = posts.filter((p) => p._id !== p._id)
+                setPosts(filteredPosts);
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 
 
