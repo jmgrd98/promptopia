@@ -9,6 +9,10 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
 
     const [copied, setCopied] = useState("")
 
+    const {data: session} = useSession()
+    const pathName = usePathname()
+    const router = useRouter()
+
     const handleCopy = () => {
         setCopied(post.prompt)
         navigator.clipboard.writeText(post.prompt)
@@ -16,6 +20,7 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
     }
 
     useEffect(() => {
+        console.log(session?.user.id)
         console.log(post)
     });
 
@@ -53,6 +58,18 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
             >
                 {post.tag}
             </p>
+
+            {session?.user.id === post.creator._id && pathName === '/profile' &&  (
+                <div className='flex justify-end items-center gap-5 mt-5'>
+                    <div className='edit_btn' onClick={handleEdit}>
+                        <p>Edit</p>
+                    </div>
+
+                    <div className='delete_btn' onClick={handleDelete}>
+                        <p>Delete</p>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
