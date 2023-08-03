@@ -31,3 +31,16 @@ export const PATCH = async (req: any, {params}: any) => {
         return new Response(JSON.stringify(error), { status: 500 });
     }
 }
+
+export const DELETE = async (req: any, {params}: any) => {
+    try {
+        await connectToDB();
+
+        const existingPrompt = await Prompt.findByIdAndRemove(params.id);
+        if(!existingPrompt) return new Response(JSON.stringify({message: "Prompt not found"}), { status: 404 });
+
+        return new Response(JSON.stringify({message: "Prompt deleted"}), { status: 200 });
+    } catch (error) {
+        return new Response(JSON.stringify(error), { status: 500 });
+    }
+}

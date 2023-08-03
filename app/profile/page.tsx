@@ -24,12 +24,17 @@ export default function MyProfile() {
         if (session?.user.id) fetchPosts()
     }, []);
 
-    const handleEdit = () => {
-
+    const handleEdit = (post) => {
+        router.push(`/update-prompt?id=${post._id}`);
     }
 
-    const handleDelete = async () => {
-
+    const handleDelete = async (post) => {
+        const res = await fetch(`/api/posts/${post._id}`, {
+            method: 'DELETE',
+        })
+        const data = await res.json()
+        console.log(data)
+        router.push('/profile')
     }
 
 
