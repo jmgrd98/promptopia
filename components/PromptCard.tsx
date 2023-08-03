@@ -18,6 +18,10 @@ export default function PromptCard({post, handleTagClick, handleEdit, handleDele
         setTimeout(() => setCopied(""), 3000)
     }
 
+    useEffect(() => {
+        console.log(post)
+    });
+
     return (
         <div className='prompt_card'>
             <div className='flex justify-between items-start gap-5'>
