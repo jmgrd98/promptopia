@@ -19,7 +19,7 @@ export default function MyProfile() {
             setPosts(data)
         }
 
-        if (session?.user.id) fetchPosts()
+        if (session.user.id) fetchPosts()
     }, []);
 
     const handleEdit = (post) => {
