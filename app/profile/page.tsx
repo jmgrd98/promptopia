@@ -49,7 +49,7 @@ export default function MyProfile() {
                 await fetch(`/api/prompt/${post._id}`, {
                     method: 'DELETE',
                 })
-                const filteredPosts = posts.filter((p) => p._id !== id);
+                const filteredPosts = posts.filter((p) => p._id !== post._id);
                 console.log('ENTROOOU')
                 setPosts(filteredPosts);
             } catch (error) {
