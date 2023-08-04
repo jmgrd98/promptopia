@@ -41,15 +41,15 @@ export default function MyProfile() {
         router.push(`/update-prompt?id=${post._id}`);
     }
 
-    const handleDelete = async (idToDelete: string) => {
+    const handleDelete = async (id: string) => {
         const hasConfirmed = confirm('Are you sure you want to delete this prompt?')
 
         if(hasConfirmed) {
             try{
-                await fetch(`/api/posts/${idToDelete}`, {
+                await fetch(`/api/prompt/${id}`, {
                     method: 'DELETE',
                 })
-                const filteredPosts = posts.filter((p) => p._id !== idToDelete);
+                const filteredPosts = posts.filter((p) => p._id !== id);
                 setPosts(filteredPosts);
             } catch (error) {
                 console.error(error)

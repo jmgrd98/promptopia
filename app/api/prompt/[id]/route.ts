@@ -36,6 +36,7 @@ export const DELETE = async (req: any, {params}: any) => {
     try {
         await connectToDB();
 
+
         const existingPrompt = await Prompt.findByIdAndRemove(params.id);
         if(!existingPrompt) return new Response(JSON.stringify({message: "Prompt not found"}), { status: 404 });
 
