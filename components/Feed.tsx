@@ -34,7 +34,6 @@ export default function Feed() {
 
     const handleSearchChange = (e: any) => {
         setSearchText(e.target.value);
-        console.log(searchText)
     };
 
     useEffect(() => {
@@ -44,8 +43,6 @@ export default function Feed() {
             setPosts(data);
             setFilteredPosts(data);
         }
-        console.log(posts)
-        console.log(filteredPosts)
         fetchPosts();
     }, []);
 
@@ -53,10 +50,10 @@ export default function Feed() {
         const filtered = posts.filter((post: any) =>
             post.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
             post.creator.username.toLowerCase().includes(searchText.toLowerCase()) ||
-            post.creator.email.toLowerCase().includes(searchText.toLowerCase())
+            post.creator.email.toLowerCase().includes(searchText.toLowerCase()) ||
+            post.tag.toLowerCase().includes(searchText.toLowerCase())
         );
         setFilteredPosts(filtered);
-        console.log(filteredPosts)
     }, [searchText, posts]);
 
 
