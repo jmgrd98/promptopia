@@ -1,9 +1,14 @@
 'use client'
 
-import {useState, useEffect} from 'react'
-import PromptCard from './PromptCard'
+import {useState, useEffect} from 'react';
+import PromptCard from './PromptCard';
 
-function PromptCardList({data, handleTagClick}: any) {
+interface PromptCardListProps {
+    data: any,
+    handleTagClick?: Function
+}
+
+function PromptCardList({data, handleTagClick}: PromptCardListProps) {
 
     if (!data) {
         return null;
@@ -23,23 +28,36 @@ function PromptCardList({data, handleTagClick}: any) {
 
 export default function Feed() {
 
-    const [searchText, setSearchText] = useState('')
-    const [posts, setPosts] = useState([])
+    const [searchText, setSearchText] = useState('');
+    const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
 
     const handleSearchChange = (e: any) => {
-        setSearchText(e.target.value)
-    }
+        setSearchText(e.target.value);
+        console.log(searchText)
+    };
 
     useEffect(() => {
         const fetchPosts = async () => {
-            const res = await fetch('/api/prompt')
-            const data = await res.json()
-            setPosts(data)
-            console.log(data)
+            const res = await fetch('/api/prompt');
+            const data = await res.json();
+            setPosts(data);
+            setFilteredPosts(data);
         }
-
-        fetchPosts()
+        console.log(posts)
+        console.log(filteredPosts)
+        fetchPosts();
     }, []);
+
+    useEffect(() => {
+        const filtered = posts.filter((post: any) =>
+            post.prompt.toLowerCase().includes(searchText.toLowerCase()) ||
+            post.creator.username.toLowerCase().includes(searchText.toLowerCase()) ||
+            post.creator.email.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setFilteredPosts(filtered);
+        console.log(filteredPosts)
+    }, [searchText, posts]);
 
 
     return (
@@ -56,9 +74,8 @@ export default function Feed() {
             </form>
 
             <PromptCardList
-                data={posts}
-                handleTagClick={() => {
-                }}
+                data={filteredPosts}
+                // handleTagClick={() => {}}
             />
         </section>
     )
