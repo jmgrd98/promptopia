@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Live app
 
 You can check it out on the link below:
-https://promptopia-6c703cmlz-jmgrd98.vercel.app/
+https://promptopia-jmgrd98.vercel.app/
 
 If you like it, give it a star!
 
